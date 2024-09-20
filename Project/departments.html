@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Department - Sunny IT Solutions Information Management System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+       
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="departments.html">Departments</a></li>
+                <li><a href="employees.html">Employees</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section>
+        <h2>Welcome to our departments</h2>
+        <h3>Form to add new employees</h3>
+        <form id="add-employee-form" onsubmit="addEmployee(event)">
+            <label for="employee-name">Name:</label>
+            <input type="text" id="employee-name" required><br><br>
+
+            <label for="employee-position">Position:</label>
+            <input type="text" id="employee-position" required><br><br>
+
+            <label for="employee-department">Department:</label>
+            <select id="employee-department">
+                <option value="IT">IT</option>
+                <option value="HR">HR</option>
+                <option value="Marketing">Marketing</option>
+                <option value="Communication">Communication</option>
+                <option value="Supply">Supply</option>
+            </select><br><br>
+
+            <input type="submit" value="Add Employee">
+        </form>
+            <p><b>Select the department from the menu to manage their information.</b></p> <form id="departmentForm">
+            <label for="department">Choose a department:</label>
+            <select id="department" name="department" onchange="showWorkers()">
+                <option value="">Select...</option>
+                <option value="IT">IT</option>
+                <option value="HR">HR</option>
+                <option value="Marketing">Marketing</option>
+                <option value="Communication">Communication</option>
+                <option value="Supply chain">Supply Chain</option>
+            </select>
+        </form>
+
+        <div id="workersList">
+        </div>
+
+       
+    </section>
+    <footer>
+        <p>&copy; 2024 Sunny IT Solutions. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function showWorkers() {
+            const department = document.getElementById("department").value;
+            const workersList = document.getElementById("workersList");
+
+            // Workers data with positions
+            const workers = {
+                "IT": [
+                    { name: "Lesego Skepeers", position: "Junior IT support" },
+                    { name: "Thabo Manganye", position: "Softwarer Developer" },
+                    { name: "Rofhiwa Nemauluma", position: "Database Administrator" }
+                ],
+                "HR": [
+                    { name: "Lily Tswale", position: "HR Manager" },
+                    { name: "Monica Nkuna", position: "Recruiter" }
+                ],
+                "Marketing": [
+                    { name: "Humphrey Selolo", position: "Assistant Marketing Manager" },
+                    { name: "Gracca Marcel", position: "Content Creator" }
+                ],
+                "Communication": [
+                    { name: "Justice Adams", position: "PR Specialist" },
+                    { name: "Ivy Kgomo", position: "Social Media Manager" }
+                ],
+                "Supply": [
+                    { name: "Lobeleni Lekota", position: "Supply Chain Manager" },
+                    { name: "Mantati Langa", position: "Logistics Coordinator" }
+                ]
+            };
+
+            workersList.innerHTML = ""; 
+
+            if (department && workers[department]) {
+                const table = document.createElement("table");
+                table.setAttribute("border", "1");
+
+                //table header
+                const headerRow = document.createElement("tr");
+                const headerName = document.createElement("th");
+                headerName.textContent = "Name";
+                const headerPosition = document.createElement("th");
+                headerPosition.textContent = "Position";
+                headerRow.appendChild(headerName);
+                headerRow.appendChild(headerPosition);
+                table.appendChild(headerRow);
+
+                // table rows for each worker
+                workers[department].forEach(worker => {
+                    const row = document.createElement("tr");
+                    const cellName = document.createElement("td");
+                    cellName.textContent = worker.name;
+                    const cellPosition = document.createElement("td");
+                    cellPosition.textContent = worker.position;
+                    row.appendChild(cellName);
+                    row.appendChild(cellPosition);
+                    table.appendChild(row);
+                });
+
+                workersList.appendChild(table);
+            } else {
+                workersList.innerHTML = "<p>Please select a department.</p>";
+            }
+        }
+    
+    </script>
+</body>
+</html>

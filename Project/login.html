@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Sunny IT Solutions Information Management System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="index.html">
+    <link href="department.html">
+    <link href="employees.html">
+    <link href="contact.html">
+</head>
+<body>
+    <header>
+        <h1>Login to Your Sunny IT Solutions Information Management System</h1>
+    
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="departments.html">Departments</a></li>
+                <li><a href="employees.html">Employees</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section>
+        <form id="loginForm" method="post" onsubmit="return validateEmail()">
+            <label for="username">Username (Email):</label>
+            <input type="text" id="username" name="username" required><br><br><br>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br>
+            
+            <input type="submit" value="Login">
+        </form>
+    </section>
+    <footer>
+        <p>&copy; 2024 Sunny IT Solutions. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function validateEmail() {
+            const email = document.getElementById('username').value;
+            if (email.indexOf('@') === -1) {
+                alert('Please enter a valid email address with "@" symbol.');
+                return false; 
+            }
+            // Redirect to departments.html after successful validation
+            document.getElementById('loginForm').action = "departments.html";
+            return true; 
+        }
+    </script>
+</body>
+</html>
